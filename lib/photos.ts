@@ -1,0 +1,136 @@
+export type Photo = {
+  id: string
+  src: string
+  alt: string
+  location?: string
+  camera?: string
+  lens?: string
+  focalLength?: string
+  aperture?: string
+  shutter?: string
+  iso?: string
+}
+
+// 10 high-quality Unsplash images (remote). You can swap to local assets later.
+export const photos: Photo[] = [
+  {
+    id: "1",
+    src: "/photos/01.jpg",
+    alt: "Paysage montagneux au Japon",
+    location: "Japon",
+    camera: "Sony A7 III",
+    lens: "24-70mm f/2.8",
+    focalLength: "35mm",
+    aperture: "f/5.6",
+    shutter: "1/250s",
+    iso: "200",
+  },
+  {
+    id: "2",
+    src: "/photos/02.jpg",
+    alt: "Rue japonaise de nuit",
+    location: "Japon",
+    camera: "Sony A7 III",
+    lens: "55mm f/1.8",
+    focalLength: "55mm",
+    aperture: "f/2",
+    shutter: "1/125s",
+    iso: "400",
+  },
+  {
+    id: "3",
+    src: "/photos/03.jpg",
+    alt: "Forêt de bambous",
+    location: "Japon",
+    camera: "Nikon Z6",
+    lens: "24-70mm f/4",
+    focalLength: "24mm",
+    aperture: "f/5.6",
+    shutter: "1/60s",
+    iso: "200",
+  },
+  {
+    id: "4",
+    src: "/photos/04.jpg",
+    alt: "Ruelle japonaise sous la pluie",
+    location: "Japon",
+    camera: "Nikon Z6",
+    lens: "24-120mm f/4",
+    focalLength: "50mm",
+    aperture: "f/8",
+    shutter: "1/125s",
+    iso: "200",
+  },
+  {
+    id: "5",
+    src: "/photos/05.jpg",
+    alt: "Allée aux lanternes",
+    location: "Japon",
+    camera: "Sony A7C",
+    lens: "55mm f/1.8",
+    focalLength: "55mm",
+    aperture: "f/1.8",
+    shutter: "1/125s",
+    iso: "800",
+  },
+  {
+    id: "6",
+    src: "/photos/06.jpg",
+    alt: "Sakura en fleurs",
+    location: "Japon",
+    camera: "Canon EOS R6",
+    lens: "35mm f/1.8",
+    focalLength: "35mm",
+    aperture: "f/2.2",
+    shutter: "1/320s",
+    iso: "400",
+  },
+  {
+    id: "7",
+    src: "/photos/07.jpg",
+    alt: "Jardin moussu près d'un temple",
+    location: "Japon",
+    camera: "Nikon D750",
+    lens: "35mm f/1.8",
+    focalLength: "35mm",
+    aperture: "f/4",
+    shutter: "1/125s",
+    iso: "200",
+  },
+  {
+    id: "8",
+    src: "/photos/08.jpg",
+    alt: "Passage piéton et parapluies",
+    location: "Japon",
+    camera: "Sony A7R IV",
+    lens: "24-70mm f/2.8",
+    focalLength: "24mm",
+    aperture: "f/7.1",
+    shutter: "1/1000s",
+    iso: "200",
+  },
+  {
+    id: "9",
+    src: "/photos/09.jpg",
+    alt: "Jardin japonais et étang",
+    location: "Japon",
+    camera: "Canon 5D Mark IV",
+    lens: "24-105mm f/4",
+    focalLength: "35mm",
+    aperture: "f/5.6",
+    shutter: "1/200s",
+    iso: "200",
+  },
+  {
+    id: "10",
+    src: "/photos/10.jpg",
+    alt: "Côte japonaise et falaises",
+    location: "Japon",
+    camera: "Fujifilm X-H1",
+    lens: "16-55mm f/2.8",
+    focalLength: "24mm",
+    aperture: "f/6.3",
+    shutter: "1/320s",
+    iso: "200",
+  },
+]
