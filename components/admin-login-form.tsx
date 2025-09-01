@@ -81,7 +81,7 @@ export function AdminLoginForm() {
           <div className="text-xs text-red-400" role="alert">{state.error}</div>
         )}
         <p className="text-xs text-white/50">
-          Définissez la variable d'env ADMIN_PASSWORD sur Vercel.
+          Définissez la variable d&apos;env ADMIN_PASSWORD sur Vercel.
         </p>
       </form>
     </Form>

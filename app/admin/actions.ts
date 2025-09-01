@@ -31,7 +31,10 @@ export async function loginWithPassword(formData: FormData) {
   redirect("/admin")
 }
 
-export async function loginWithPasswordState(formData: FormData) {
+export async function loginWithPasswordState(
+  _prev: { success: true } | { success: false; error: string } | undefined,
+  formData: FormData
+) {
   const pwd = formData.get("password")?.toString() || ""
   const expected = process.env.ADMIN_PASSWORD || ""
   if (!expected) {

@@ -1,7 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { Controller, FormProvider, useFormContext } from "react-hook-form"
+import {
+  Controller,
+  FormProvider,
+  useFormContext,
+  type FieldValues,
+  type FieldPath,
+  type Control,
+  type ControllerProps,
+} from "react-hook-form"
 import { cn } from "@/lib/utils"
 
 const Form = FormProvider
@@ -12,11 +20,19 @@ type FormFieldContextValue = {
 
 const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFieldContextValue)
 
-const FormField = ({ name, ...props }: React.ComponentProps<typeof Controller>) => {
+type FormFieldProps<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>> = {
+  name: TName
+  control: Control<TFieldValues>
+  render: ControllerProps<TFieldValues, TName>["render"]
+}
+
+function FormField<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>(
+  props: FormFieldProps<TFieldValues, TName>
+) {
+  const { name, control, render } = props
   return (
     <FormFieldContext.Provider value={{ name: name as string }}>
-      {/* @ts-expect-error name is provided above */}
-      <Controller name={name} {...props} />
+      <Controller control={control} name={name} render={render} />
     </FormFieldContext.Provider>
   )
 }
@@ -24,7 +40,7 @@ const FormField = ({ name, ...props }: React.ComponentProps<typeof Controller>) 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
   const { formState, getFieldState } = useFormContext()
-  const fieldState = getFieldState(fieldContext.name, formState)
+  const fieldState = getFieldState(fieldContext.name as unknown as FieldPath<FieldValues>, formState)
   return { id: fieldContext.name, name: fieldContext.name, formItemId: fieldContext.name, ...fieldState }
 }
 

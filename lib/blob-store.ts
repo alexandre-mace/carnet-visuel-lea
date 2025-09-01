@@ -21,13 +21,11 @@ export async function getPhotosFromBlob(): Promise<Photo[] | null> {
     const { blobs } = await list({ prefix: "photos/", token })
     const entry = blobs.find((b) => b.pathname === JSON_KEY)
     if (!entry) return null
-    const base = (entry as any).downloadUrl ?? entry.url
+    const base = entry.downloadUrl || entry.url
     const url = `${base}${base.includes("?") ? "&" : "?"}v=${Date.now()}`
     const res = await fetch(url, {
       cache: "no-store",
-      // Help bust CDN caches if any
-      headers: { "cache-control": "no-cache" } as any,
-      next: { revalidate: 0 } as any,
+      headers: { "cache-control": "no-cache" } satisfies HeadersInit,
     })
     if (!res.ok) return null
     const data = (await res.json()) as { photos: Photo[] } | Photo[]
