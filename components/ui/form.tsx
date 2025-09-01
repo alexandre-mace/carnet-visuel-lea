@@ -45,14 +45,24 @@ const useFormField = () => {
 }
 
 const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("space-y-1", className)} {...props} />
+  <div ref={ref} className={cn("grid gap-y-2", className)} {...props} />
 ))
 FormItem.displayName = "FormItem"
 
 const FormLabel = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttributes<HTMLLabelElement>>(
   ({ className, ...props }, ref) => {
     const { error } = useFormField()
-    return <label ref={ref} className={cn("text-sm", error && "text-red-400", className)} {...props} />
+    return (
+      <label
+        ref={ref}
+        className={cn(
+          "text-sm font-medium leading-none",
+          error && "text-red-400",
+          className
+        )}
+        {...props}
+      />
+    )
   }
 )
 FormLabel.displayName = "FormLabel"
@@ -68,7 +78,7 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
     const body = error ? String(error.message ?? children) : children
     if (!body) return null
     return (
-      <p ref={ref} className={cn("text-xs text-red-400", className)} {...props}>
+      <p ref={ref} className={cn("mt-1 text-[0.8rem] text-red-400", className)} {...props}>
         {body}
       </p>
     )

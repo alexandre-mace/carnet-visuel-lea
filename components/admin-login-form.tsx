@@ -57,16 +57,18 @@ export function AdminLoginForm() {
           e.preventDefault()
           submitValidated()
         }}
-        className="w-full max-w-sm space-y-3"
+        className="w-full max-w-sm space-y-6"
       >
-        <h1 className="text-lg font-medium">Admin – Connexion</h1>
-        <p className="text-white/60 text-sm">Entrez le mot de passe admin.</p>
+        <div className="space-y-1.5">
+          <h1 className="text-lg font-medium">Admin – Connexion</h1>
+          <p className="text-white/60 text-sm">Entrez le mot de passe admin.</p>
+        </div>
 
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="gap-y-2">
               <FormLabel>Mot de passe</FormLabel>
               <FormControl>
                 <Input type="password" placeholder="Mot de passe" {...field} />
@@ -76,13 +78,12 @@ export function AdminLoginForm() {
           )}
         />
 
-        <FormSubmitButton className="w-full">Se connecter</FormSubmitButton>
-        {state && "success" in state && !state.success && (
-          <div className="text-xs text-red-400" role="alert">{state.error}</div>
-        )}
-        <p className="text-xs text-white/50">
-          Définissez la variable d&apos;env ADMIN_PASSWORD sur Vercel.
-        </p>
+        <div className="space-y-2">
+          <FormSubmitButton className="w-full">Se connecter</FormSubmitButton>
+          {state && "success" in state && !state.success && (
+            <div className="text-xs text-red-400" role="alert">{state.error}</div>
+          )}
+        </div>
       </form>
     </Form>
   )
