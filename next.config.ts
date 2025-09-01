@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  serverActions: {
+    // Limit uploads to 2 MB for Server Actions
+    bodySizeLimit: "2mb",
+  },
 };
 
 export default nextConfig;

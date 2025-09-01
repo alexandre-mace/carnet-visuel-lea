@@ -3,7 +3,7 @@
 import { cookies } from "next/headers"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
-import { getPhotosFromBlob, savePhotosToBlob, uploadImageToBlob } from "@/lib/blob-store"
+import { getPhotosFromBlob, savePhotosToBlob, uploadImageToBlob, setLocalPhotosCache } from "@/lib/blob-store"
 import type { Photo } from "@/lib/photos"
 import { randomUUID } from "node:crypto"
 
@@ -24,11 +24,30 @@ export async function loginWithPassword(formData: FormData) {
   (await cookies()).set("admin_session", "true", {
     httpOnly: true,
     sameSite: "lax",
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     path: "/",
     maxAge: 60 * 60 * 24 * 7, // 7 jours
   })
   redirect("/admin")
+}
+
+export async function loginWithPasswordState(formData: FormData) {
+  const pwd = formData.get("password")?.toString() || ""
+  const expected = process.env.ADMIN_PASSWORD || ""
+  if (!expected) {
+    return { success: false as const, error: "ADMIN_PASSWORD non configuré" }
+  }
+  if (pwd !== expected) {
+    return { success: false as const, error: "Mot de passe incorrect" }
+  }
+  ;(await cookies()).set("admin_session", "true", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,
+  })
+  return { success: true as const }
 }
 
 export async function logout() {
@@ -66,7 +85,10 @@ export async function addPhoto(formData: FormData) {
   }
   const next = [newPhoto, ...current]
   await savePhotosToBlob(next)
+  setLocalPhotosCache(next)
   revalidatePath("/")
+  revalidatePath("/admin")
+  revalidatePath("/api/photos")
   redirect("/admin")
 }
 
@@ -77,6 +99,9 @@ export async function deletePhoto(formData: FormData) {
   const current = (await getPhotosFromBlob()) ?? []
   const next = current.filter((p) => p.id !== id)
   await savePhotosToBlob(next)
+  setLocalPhotosCache(next)
   revalidatePath("/")
+  revalidatePath("/admin")
+  revalidatePath("/api/photos")
   redirect("/admin")
 }
