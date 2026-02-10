@@ -10,13 +10,13 @@ export default async function Home() {
   const photos: Photo[] = fromBlob ?? fallback
   return (
     <div className="min-h-screen bg-black text-white">
-      <header className="sticky top-0 z-10 bg-black/70 backdrop-blur">
+      <header>
         <div className="mx-auto px-4 py-1 sm:py-1.5">
           <h1 className="text-sm sm:text-base font-medium tracking-tight">Carnet visuel</h1>
-          <p className="text-[11px] text-white/60">Journal photographique — grandes images et réglages.</p>
+          <p className="text-sm text-white/60">Journal photographique — grandes images et réglages.</p>
         </div>
       </header>
-      <main className="mx-auto px-4 pt-3 pb-6 sm:pt-4 sm:pb-10">
+      <main className="mx-auto px-4 pt-1.5 pb-6 sm:pt-2 sm:pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {photos.map((p) => (
             <div key={p.id}>
