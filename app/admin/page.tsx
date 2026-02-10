@@ -1,9 +1,11 @@
+import Image from "next/image"
 import { cookies } from "next/headers"
 import { logout } from "./actions"
 import { getPhotosFromBlob } from "@/lib/blob-store"
 import { AdminAddPhotoForm } from "@/components/admin-add-photo-form"
 import { AdminLoginForm } from "@/components/admin-login-form"
 import { AdminDeleteForm } from "@/components/admin-delete-form"
+import { AdminEditPhotoForm } from "@/components/admin-edit-photo-form"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
@@ -44,7 +46,7 @@ export default async function AdminPage() {
             {list.map((p) => (
               <li key={p.id} className="p-3">
                 <div className="flex items-start gap-3">
-                  <img src={p.src} alt="" className="w-16 h-16 object-cover flex-none" />
+                  <Image src={p.src} alt="" width={64} height={64} className="w-16 h-16 object-cover flex-none" />
                   <div className="min-w-0 flex-1">
                     <div className="text-sm">{p.alt}</div>
                     <div className="text-xs text-white/60">{p.location}</div>
@@ -56,6 +58,7 @@ export default async function AdminPage() {
                   </div>
                   <AdminDeleteForm id={p.id} />
                 </div>
+                <AdminEditPhotoForm photo={p} />
               </li>
             ))}
           </ul>

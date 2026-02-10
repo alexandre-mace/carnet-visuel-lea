@@ -16,10 +16,10 @@ export default async function Home() {
           <p className="text-[11px] text-white/60">Journal photographique — grandes images et réglages.</p>
         </div>
       </header>
-      <main className="mx-auto px-4 py-6 sm:py-10">
-        <div className="columns-1 md:columns-2 [column-gap:1.5rem] [column-fill:balance] [orphans:1] [widows:1]">
+      <main className="mx-auto px-4 pt-3 pb-6 sm:pt-4 sm:pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {photos.map((p) => (
-            <div key={p.id} className="mb-6 break-inside-avoid">
+            <div key={p.id}>
               <PhotoCard photo={p} />
             </div>
           ))}

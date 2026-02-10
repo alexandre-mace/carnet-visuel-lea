@@ -1,4 +1,4 @@
-import { list, put } from "@vercel/blob"
+import { del, list, put } from "@vercel/blob"
 import { randomUUID } from "node:crypto"
 import type { Photo } from "@/lib/photos"
 
@@ -47,6 +47,16 @@ export async function savePhotosToBlob(photos: Photo[]) {
     cacheControlMaxAge: 0,
     token,
   })
+}
+
+export async function deleteImageFromBlob(url: string) {
+  const token = process.env.BLOB_READ_WRITE_TOKEN
+  if (!token) return
+  try {
+    await del(url, { token })
+  } catch {
+    // best-effort cleanup
+  }
 }
 
 export async function uploadImageToBlob(file: File) {

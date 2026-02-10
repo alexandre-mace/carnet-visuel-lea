@@ -1,5 +1,4 @@
-"use client"
-
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 import type { Photo } from "@/lib/photos"
 
@@ -12,11 +11,13 @@ export function PhotoCard({ photo, className }: Props) {
   return (
     <article className={cn("w-full break-inside-avoid", className)}>
       <div className="overflow-hidden bg-neutral-900/60 ring-1 ring-white/10">
-        <img
+        <Image
           src={photo.src}
           alt={photo.alt}
-          loading="lazy"
-          className="w-full h-auto object-cover"
+          width={1200}
+          height={800}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="w-full h-auto max-h-[80vh] object-cover"
         />
       </div>
       <div className="px-1.5 sm:px-0">
