@@ -1,4 +1,4 @@
-import { PhotoCard } from "@/components/photo-card";
+import { PhotoGallery } from "@/components/photo-gallery";
 import { photos as fallback, type Photo } from "@/lib/photos";
 import { getPhotosFromBlob } from "@/lib/blob-store";
 
@@ -17,15 +17,8 @@ export default async function Home() {
         </div>
       </header>
       <main className="mx-auto px-4 pt-1.5 pb-6 sm:pt-2 sm:pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {photos.map((p) => (
-            <div key={p.id}>
-              <PhotoCard photo={p} />
-            </div>
-          ))}
-        </div>
+        <PhotoGallery photos={photos} />
       </main>
-
     </div>
   );
 }
