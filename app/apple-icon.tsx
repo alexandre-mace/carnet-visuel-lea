@@ -21,7 +21,7 @@ export default async function AppleIcon() {
           background: "black",
         }}
       >
-        <img src={base64} width="160" height="160" />
+        <img src={base64} width="130" height="130" />
       </div>
     ),
     { ...size }

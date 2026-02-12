@@ -21,7 +21,7 @@ export default async function Icon() {
           background: "black",
         }}
       >
-        <img src={base64} width="56" height="56" />
+        <img src={base64} width="46" height="46" />
       </div>
     ),
     { ...size }
