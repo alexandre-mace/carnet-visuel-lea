@@ -2,10 +2,10 @@ import { ImageResponse } from "next/og"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
-export const size = { width: 180, height: 180 }
+export const size = { width: 64, height: 64 }
 export const contentType = "image/png"
 
-export default async function AppleIcon() {
+export default async function Icon() {
   const imgData = await readFile(join(process.cwd(), "public/emoji-camera.png"))
   const base64 = `data:image/png;base64,${imgData.toString("base64")}`
 
@@ -21,7 +21,7 @@ export default async function AppleIcon() {
           background: "black",
         }}
       >
-        <img src={base64} width="160" height="160" />
+        <img src={base64} width="56" height="56" />
       </div>
     ),
     { ...size }
