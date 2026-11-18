@@ -13,13 +13,16 @@ const nextConfig: NextConfig = {
     // 31 jours, le plafond de cache Vercel pour les images locales (60 s par défaut).
     minimumCacheTTL: 2678400,
     // Seules les photos de secours de `public/photos` passent par l'optimiseur.
-    localPatterns: [{ pathname: "/photos/**" }],
+    // `search: ""` refuse toute query string, qui ferait sinon de chaque `?x=…`
+    // une nouvelle source.
+    localPatterns: [{ pathname: "/photos/**", search: "" }],
     remotePatterns: [
       {
         // Le store Blob de ce projet, pas n'importe quel store Vercel.
         protocol: "https",
         hostname: "rw3zug3z3clvzdxx.public.blob.vercel-storage.com",
         pathname: "/photos/images/**",
+        search: "",
       },
     ],
   },
